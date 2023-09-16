@@ -9,4 +9,8 @@ apples = Apple()
 gameBoard.setSnakeInstance(mainSnake)
 gameBoard.setAppleInstance(apples)
 
-gameBoard.printBoard()
+TheGameIsRunning = True
+
+while TheGameIsRunning:
+    gameBoard.printBoard()
+    mainSnake.updateSnake()
