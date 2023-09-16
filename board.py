@@ -1,6 +1,6 @@
 class Board:
     def __init__(self) -> None:
-        self.BoardSize = [24, 12]  # W,H
+        self.BoardSize = [24, 24]  # W,H
         self.BoardBlock = [
             (column, row)  # Result
             for row in range(self.BoardSize[1])  # getting every index in the width
