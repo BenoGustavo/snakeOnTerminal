@@ -20,11 +20,25 @@ class Snake:
     def updateSnake(self):
         """Updates the snake body on the board by an given direction"""
 
-        #Creates a new head based on the direction that was given by the user
-        newSnakeHead = self.snakeBody[0][0] + self.direction[0], self.snakeBody[0][1] + self.direction[1]
+        # Creates a new head based on the direction that was given by the user
+        newSnakeHead = (
+            self.snakeBody[0][0] + self.direction[0],
+            self.snakeBody[0][1] + self.direction[1],
+        )
 
-        #Inserting the new head in the snakeBody tuple
-        self.snakeBody.insert(0,newSnakeHead)
+        # Inserting the new head in the snakeBody tuple
+        self.snakeBody.insert(0, newSnakeHead)
 
-        #Removes the last segment of the snake
+        # Removes the last segment of the snake
         self.snakeBody.pop(-1)
+
+    def moveSnake(self, keyPressed):
+        match keyPressed:
+            case "w":
+                self.direction = self.DIRECTIONS["up"]
+            case "a":
+                self.direction = self.DIRECTIONS["left"]
+            case "s":
+                self.direction = self.DIRECTIONS["down"]
+            case "d":
+                self.direction = self.DIRECTIONS["right"]
