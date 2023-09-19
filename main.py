@@ -1,5 +1,6 @@
-# from pytimedinput import timedInput
-import keyboard
+from pytimedinput import timedInput
+
+# import keyboard #cant import on linux because i need to sudo
 
 from time import sleep
 
@@ -8,11 +9,12 @@ from snake import Snake
 from apple import Apple
 
 gameBoard = Board()
-mainSnake = Snake(gameBoard.getBoardSize()[1])
 apples = Apple()
+mainSnake = Snake(gameBoard.getBoardSize()[1], apples)
+
 
 gameBoard.setSnakeInstance(mainSnake)
-gameBoard.setAppleInstance(apples)
+apples.setSnakeInstance(mainSnake)
 
 TheGameIsRunning = True
 FPS = 5
@@ -22,17 +24,19 @@ while TheGameIsRunning:
     # Clearing the screen
     print("\033[H", end="")
 
+    gameBoard.setApplePosition(apples.getApplePosition())
     gameBoard.printBoard()
     sleep(1 / FPS)
 
-    # keyPressed, _ = timedInput(
-    #     " ", timeout=1 / FPS, maxLength=1, allowCharacters="wasd"
-    # )
-    buttonEvent = keyboard.read_event()
+    keyPressed, _ = timedInput(
+        " ", timeout=1 / FPS, maxLength=1, allowCharacters="wasd"
+    )
 
-    if buttonEvent.event_type == keyboard.KEY_DOWN:
-        keyPressed = buttonEvent.name
+    # buttonEvent = keyboard.read_event()
+    # if buttonEvent.event_type == keyboard.KEY_DOWN:
+    # keyPressed = buttonEvent.name
 
-        mainSnake.moveSnake(keyPressed)
+    mainSnake.moveSnake(keyPressed)
 
     mainSnake.updateSnake()
+    mainSnake.appleCollision()
