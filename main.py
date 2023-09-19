@@ -7,6 +7,7 @@ from time import sleep
 from board import Board
 from snake import Snake
 from apple import Apple
+from menu import gameINIT, gameOver
 
 gameBoard = Board()
 apples = Apple()
@@ -20,6 +21,8 @@ TheGameIsRunning = True
 FPS = 5
 SIZE = gameBoard.getBoardSize()[0] - len(f"★ Score ★ = ({apples.getApplesEated()})") / 2
 DIVISOR = int(SIZE) * " "
+
+DIFFICULT_CHOICE = gameINIT()
 
 while TheGameIsRunning:
     # Clearing the screen
@@ -38,10 +41,12 @@ while TheGameIsRunning:
     # if buttonEvent.event_type == keyboard.KEY_DOWN:
     # keyPressed = buttonEvent.name
 
-    mainSnake.moveSnake(keyPressed)
+    mainSnake.moveSnake(keyPressed.lower())
 
     mainSnake.updateSnake()
-    FPS = mainSnake.appleCollision(FPS)
+    FPS = mainSnake.appleCollision(FPS, DIFFICULT_CHOICE)
 
     if not mainSnake.isSnakeAlive():
-        break
+        TheGameIsRunning = False
+
+gameOver(apples.getApplesEated(), DIFFICULT_CHOICE)

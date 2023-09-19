@@ -44,12 +44,22 @@ class Snake:
         # Sets the apple to unEated
         self.appleInstance.setAppleToUneated()
 
-    def appleCollision(self, FPS):
+    def appleCollision(self, FPS, difficulty):
         if self.appleInstance.applePosition == self.snakeBody[0]:
             self.appleInstance.setAppleToEated()
             self.appleInstance.updateApplePosition()
             self.appleInstance.setAppleEatedCouter(1)
-            FPS += 5
+
+            match difficulty:
+                case "1":  # Easy
+                    FPS += 1
+                case "2":  # Normal
+                    FPS += 2
+                case "3":  # Hard
+                    FPS += 3
+                case "4":  # XXHARD
+                    FPS += 5
+
             return FPS
         return FPS
 
