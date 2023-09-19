@@ -1,3 +1,8 @@
+from colorama import Fore, init
+
+init(autoreset=True)
+
+
 class Board:
     def __init__(self) -> None:
         self.BoardSize = [24, 24]  # W,H
@@ -22,10 +27,10 @@ class Board:
     def printBoard(self):
         for block in self.BoardBlock:
             if block in self.snakeInstance.getSnakeBody():
-                print("O", end="")
+                print(Fore.GREEN + "O", end="")
 
             elif block == self.applePosition:
-                print("★", end="")
+                print(Fore.LIGHTYELLOW_EX + "★", end="")
 
             elif block[0] in (0, self.BoardSize[0] - 1):
                 print("╏", end="")

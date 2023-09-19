@@ -44,11 +44,14 @@ class Snake:
         # Sets the apple to unEated
         self.appleInstance.setAppleToUneated()
 
-    def appleCollision(self):
+    def appleCollision(self, FPS):
         if self.appleInstance.applePosition == self.snakeBody[0]:
             self.appleInstance.setAppleToEated()
             self.appleInstance.updateApplePosition()
             self.appleInstance.setAppleEatedCouter(1)
+            FPS += 5
+            return FPS
+        return FPS
 
     def isSnakeAlive(self) -> bool:
         """Checks if the snake is alive"""

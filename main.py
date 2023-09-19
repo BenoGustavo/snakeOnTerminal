@@ -18,15 +18,14 @@ apples.setSnakeInstance(mainSnake)
 
 TheGameIsRunning = True
 FPS = 5
-SCORE_BOARD = f"★ Score ★ = ({apples.getApplesEated()})"
-SIZE = gameBoard.getBoardSize()[0] - len(SCORE_BOARD) / 2
+SIZE = gameBoard.getBoardSize()[0] - len(f"★ Score ★ = ({apples.getApplesEated()})") / 2
 DIVISOR = int(SIZE) * " "
 
 while TheGameIsRunning:
     # Clearing the screen
     print("\033[H", end="")
 
-    print(f"\n\n{DIVISOR}{SCORE_BOARD}{DIVISOR}")
+    print(f"\n\n{DIVISOR}★ Score ★ = ({apples.getApplesEated()}){DIVISOR}")
     gameBoard.setApplePosition(apples.getApplePosition())
     gameBoard.printBoard()
     sleep(1 / FPS)
@@ -42,7 +41,7 @@ while TheGameIsRunning:
     mainSnake.moveSnake(keyPressed)
 
     mainSnake.updateSnake()
-    mainSnake.appleCollision()
+    FPS = mainSnake.appleCollision(FPS)
 
     if not mainSnake.isSnakeAlive():
         break
