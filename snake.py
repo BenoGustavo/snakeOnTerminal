@@ -1,5 +1,5 @@
 class Snake:
-    def __init__(self, boardHeight) -> None:
+    def __init__(self, boardHeight, appleInstance) -> None:
         self.snakeBody = [
             (5, boardHeight // 2),
             (4, boardHeight // 2),
@@ -12,6 +12,8 @@ class Snake:
             "right": (1, 0),
         }
         self.direction = self.DIRECTIONS["up"]
+
+        self.appleInstance = appleInstance
 
     def getSnakeBody(self):
         """Returns a tuple with the coordinates of the snake tuple = (width,height)"""
@@ -29,8 +31,18 @@ class Snake:
         # Inserting the new head in the snakeBody tuple
         self.snakeBody.insert(0, newSnakeHead)
 
-        # Removes the last segment of the snake
-        self.snakeBody.pop(-1)
+        # Increse the size of the snake or pop the last segment
+        if not self.appleInstance.getAppleState():
+            # Removes the last segment of the snake
+            self.snakeBody.pop(-1)
+
+        # Sets the apple to unEated
+        self.appleInstance.setAppleToUneated()
+
+    def appleCollision(self):
+        if self.appleInstance.applePosition == self.snakeBody[0]:
+            self.appleInstance.setAppleToEated()
+            self.appleInstance.updateApplePosition()
 
     def moveSnake(self, keyPressed):
         match keyPressed:
