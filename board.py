@@ -13,8 +13,8 @@ class Board:
     def setSnakeInstance(self, snakeInstance):
         self.snakeInstance = snakeInstance
 
-    def setAppleInstance(self, appleInstance):
-        self.appleInstance = appleInstance
+    def setApplePosition(self, applepossiton):
+        self.applePosition = applepossiton
 
     def getBoardSize(self):
         return self.BoardSize
@@ -24,7 +24,7 @@ class Board:
             if block in self.snakeInstance.getSnakeBody():
                 print("X", end="")
 
-            elif block == self.appleInstance.getApplePosition():
+            elif block == self.applePosition:
                 print("a", end="")
 
             elif block[0] in (0, self.BoardSize[0] - 1):
