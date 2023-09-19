@@ -22,10 +22,10 @@ class Board:
     def printBoard(self):
         for block in self.BoardBlock:
             if block in self.snakeInstance.getSnakeBody():
-                print("X", end="")
+                print("O", end="")
 
             elif block == self.applePosition:
-                print("a", end="")
+                print("★", end="")
 
             elif block[0] in (0, self.BoardSize[0] - 1):
                 print("╏", end="")

@@ -43,6 +43,7 @@ class Snake:
         if self.appleInstance.applePosition == self.snakeBody[0]:
             self.appleInstance.setAppleToEated()
             self.appleInstance.updateApplePosition()
+            self.appleInstance.setAppleEatedCouter(1)
 
     def moveSnake(self, keyPressed):
         match keyPressed:
