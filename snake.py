@@ -15,9 +15,14 @@ class Snake:
 
         self.appleInstance = appleInstance
 
+        self.boardSize = None
+
     def getSnakeBody(self):
         """Returns a tuple with the coordinates of the snake tuple = (width,height)"""
         return self.snakeBody
+
+    def setBoardSize(self, boardSize: list):
+        self.boardSize = boardSize
 
     def updateSnake(self):
         """Updates the snake body on the board by an given direction"""
@@ -44,6 +49,19 @@ class Snake:
             self.appleInstance.setAppleToEated()
             self.appleInstance.updateApplePosition()
             self.appleInstance.setAppleEatedCouter(1)
+
+    def isSnakeAlive(self) -> bool:
+        """Checks if the snake is alive"""
+        if (
+            # Snake touched the board lateral border
+            self.snakeBody[0][0] in (0, self.boardSize[0] - 1)
+            # Snake touched the board up and down border
+            or self.snakeBody[0][1] in (0, self.boardSize[1] - 1)
+            # Snake touched one of his parts
+            or self.snakeBody[0] in self.snakeBody[1:]
+        ):
+            return False
+        return True
 
     def moveSnake(self, keyPressed):
         match keyPressed:

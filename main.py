@@ -11,7 +11,7 @@ from apple import Apple
 gameBoard = Board()
 apples = Apple()
 mainSnake = Snake(gameBoard.getBoardSize()[1], apples)
-
+mainSnake.setBoardSize(gameBoard.getBoardSize())
 
 gameBoard.setSnakeInstance(mainSnake)
 apples.setSnakeInstance(mainSnake)
@@ -43,3 +43,6 @@ while TheGameIsRunning:
 
     mainSnake.updateSnake()
     mainSnake.appleCollision()
+
+    if not mainSnake.isSnakeAlive():
+        break
