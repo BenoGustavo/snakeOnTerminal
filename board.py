@@ -27,7 +27,7 @@ class Board:
     def printBoard(self):
         for block in self.BoardBlock:
             if block in self.snakeInstance.getSnakeBody():
-                print(Fore.GREEN + "O", end="")
+                print(self.snakeInstance.getSnakeColor() + "O", end="")
 
             elif block == self.applePosition:
                 print(Fore.LIGHTYELLOW_EX + "★", end="")

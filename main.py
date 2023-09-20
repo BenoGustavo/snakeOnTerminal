@@ -1,9 +1,9 @@
 from pytimedinput import timedInput
-
-# import keyboard #cant import on linux because i need to sudo
-
+from os import system
 from time import sleep
+from colorama import Fore
 
+from utils import clearScreenCommand
 from board import Board
 from snake import Snake
 from apple import Apple
@@ -22,24 +22,26 @@ FPS = 5
 SIZE = gameBoard.getBoardSize()[0] - len(f"★ Score ★ = ({apples.getApplesEated()})") / 2
 DIVISOR = int(SIZE) * " "
 
+system(clearScreenCommand)
+
 DIFFICULT_CHOICE = gameINIT()
+
+system(clearScreenCommand)
 
 while TheGameIsRunning:
     # Clearing the screen
     print("\033[H", end="")
 
+    # Need too much performace
+    # system(clearScreenCommand)
+
     print(f"\n\n{DIVISOR}★ Score ★ = ({apples.getApplesEated()}){DIVISOR}")
     gameBoard.setApplePosition(apples.getApplePosition())
     gameBoard.printBoard()
-    sleep(1 / FPS)
 
     keyPressed, _ = timedInput(
-        " ", timeout=1 / FPS, maxLength=1, allowCharacters="wasd"
+        " ", timeout=1 / FPS, maxLength=1, allowCharacters="wasdWASD"
     )
-
-    # buttonEvent = keyboard.read_event()
-    # if buttonEvent.event_type == keyboard.KEY_DOWN:
-    # keyPressed = buttonEvent.name
 
     mainSnake.moveSnake(keyPressed.lower())
 
@@ -47,6 +49,13 @@ while TheGameIsRunning:
     FPS = mainSnake.appleCollision(FPS, DIFFICULT_CHOICE)
 
     if not mainSnake.isSnakeAlive():
+        mainSnake.setSnakeColor(Fore.RED)
+        system(clearScreenCommand)
+
+        gameBoard.printBoard()
+
+        sleep(2)
         TheGameIsRunning = False
 
+system(clearScreenCommand)
 gameOver(apples.getApplesEated(), DIFFICULT_CHOICE)

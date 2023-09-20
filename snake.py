@@ -1,5 +1,12 @@
+from colorama import Fore, init
+
+init(autoreset=True)
+
+
 class Snake:
     def __init__(self, boardHeight, appleInstance) -> None:
+        self.snakeColor = Fore.GREEN
+
         self.snakeBody = [
             (5, boardHeight // 2),
             (4, boardHeight // 2),
@@ -16,6 +23,12 @@ class Snake:
         self.appleInstance = appleInstance
 
         self.boardSize = None
+
+    def getSnakeColor(self):
+        return self.snakeColor
+
+    def setSnakeColor(self, newcolor):
+        self.snakeColor = newcolor
 
     def getSnakeBody(self):
         """Returns a tuple with the coordinates of the snake tuple = (width,height)"""
@@ -52,13 +65,13 @@ class Snake:
 
             match difficulty:
                 case "1":  # Easy
-                    FPS += 1
+                    FPS += 0.5
                 case "2":  # Normal
-                    FPS += 2
+                    FPS += 1
                 case "3":  # Hard
-                    FPS += 3
+                    FPS += 1.5
                 case "4":  # XXHARD
-                    FPS += 5
+                    FPS += 2.0
 
             return FPS
         return FPS
