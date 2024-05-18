@@ -22,7 +22,7 @@ def gameINIT():
         print(Fore.LIGHTYELLOW_EX + "★    1 - Easy                  ★")
         print(Fore.LIGHTYELLOW_EX + "★    2 - Normal                ★")
         print(Fore.LIGHTYELLOW_EX + "★    3 - Hard                  ★")
-        print(Fore.LIGHTYELLOW_EX + "★    4 - MindFuck              ★")
+        print(Fore.LIGHTYELLOW_EX + "★    4 - Godlike               ★")
         print(Fore.LIGHTYELLOW_EX + "★                              ★")
         print(Fore.LIGHTYELLOW_EX + "★ " * 16)
         choice = input("\nChoose the difficulty: ")
