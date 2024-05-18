@@ -44,3 +44,6 @@ class Board:
 
             if block[0] == self.BoardSize[0] - 1:
                 print("")
+    
+    def getBoard(self):
+        return self.BoardBlock

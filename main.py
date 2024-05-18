@@ -28,6 +28,8 @@ DIFFICULT_CHOICE = gameINIT()
 
 system(clearScreenCommand)
 
+previousBoard = None
+previousSnake = None
 while TheGameIsRunning:
     # Clearing the screen
     print("\033[H", end="")
@@ -37,7 +39,13 @@ while TheGameIsRunning:
 
     print(f"\n\n{DIVISOR}★ Score ★ = ({apples.getApplesEated()}){DIVISOR}")
     gameBoard.setApplePosition(apples.getApplePosition())
-    gameBoard.printBoard()
+
+    currentBoard = gameBoard.getBoard()
+    currentSnake = mainSnake.getSnakeBody()
+
+    if previousBoard != currentBoard or previousSnake != currentSnake:
+        gameBoard.printBoard()
+        previousBoard = currentBoard
 
     keyPressed, _ = timedInput(
         " ", timeout=1 / FPS, maxLength=1, allowCharacters="wasdWASD"
