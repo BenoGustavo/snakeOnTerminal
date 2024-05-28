@@ -3,7 +3,7 @@ from colorama import Fore, init
 init(autoreset=True)
 
 
-def gameINIT():
+def gameINIT() -> str:
     difficulty = ["1", "2", "3", "4", "5"]
     choice = ""
 
